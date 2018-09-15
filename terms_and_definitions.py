@@ -31,6 +31,7 @@ for term in terms:
 		corrects.append(terms[i])
 	else:
 		print("Incorrect")
+		print("%s") % (definitions[i])
 		incorrects.append(terms[i])
 	i = i + 1
 
