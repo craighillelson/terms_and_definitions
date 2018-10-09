@@ -1,9 +1,8 @@
 # import
 import csv
 
-# define function
-def print_return():
-	print("\n")
+rtn = lambda : '\n'
+print(rtn())
 
 # create lists to be populated later
 terms = []
@@ -23,7 +22,7 @@ i = 0
 
 # loop through terms, quiz user, and add correct and incorrect answers to respective lists
 for term in terms:
-	print_return()
+	print(rtn())
 	prompt = "Term: %s\nDefinition: " % (terms[i])
 	user_answer = raw_input(prompt) 
 	if user_answer == definitions[i]:
@@ -39,17 +38,17 @@ for term in terms:
 num_correct = len(corrects)
 num_inconnect = len(incorrects)
 
-print_return()
+print(rtn())
 
 # update user on their performance
 print("%s %s") % ("Correct Answers:", num_correct)
 for correct in corrects:
 	print(correct)
 
-print_return()
+print(rtn())
 
 print("%s %s") % ("Incorrect Answers:", num_inconnect)
 for incorrect in incorrects:
 	print(incorrect)
 
-print_return()
+print(rtn())
