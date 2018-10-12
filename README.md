@@ -1,4 +1,4 @@
-# terms_and_definitions
+# Overview
 
 Quiz game to help learn terms and definitions.
 
