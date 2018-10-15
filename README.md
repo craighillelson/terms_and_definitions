@@ -2,7 +2,7 @@
 
 Quiz game to help learn terms and definitions.
 
-# Instructions
+## Instructions
 
 1. Create a csv named 'terms.csv'
 1. Add the headers 'term' and 'definition' and populate the file with the terms and definitions you'd like to drill
