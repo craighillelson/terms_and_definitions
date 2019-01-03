@@ -1,67 +1,73 @@
+""" __doc__ """
+
 # import
 import csv
 from collections import namedtuple
 
 # return lambda for readability
-rtn = lambda : '\n'
+RTN = lambda: '\n'
 
 # define function
 def correct_and_incorrect_answers(a, b):
-	if len(a) > 0:
-		print(b.upper())
-		for law in a:
-			print(law)
-	else:
-		pass
+    """ print list of incorrect answers """
+    if len(a) > 0:
+        print b.upper()
+        for law in a:
+            print law
+    else:
+        pass
 
 # create dictionary to be populated by contents of csv
-terms_and_definitions = {}
+TERMS_AND_DEFINITIONS = {}
 
 # import csv and turn the contents into a dictionary
 with open('terms_and_definitions.csv') as f:
-	f_csv = csv.reader(f)
-	headings = next(f_csv)
-	Row = namedtuple('Row', headings)
-	terms_total = 0.0
-	for r in f_csv:
-		row = Row(*r)
-		terms_and_definitions[row.term] = row.definition
-		terms_total = terms_total + 1.0
+    F_CSV = csv.reader(f)
+    HEADINGS = next(F_CSV)
+    Row = namedtuple('Row', HEADINGS)
+    TERMS_TOTAL = 0.0
+    for r in F_CSV:
+        row = Row(*r)
+        TERMS_AND_DEFINITIONS[row.term] = row.definition
+        TERMS_TOTAL = TERMS_TOTAL + 1.0
 
 # create lists to be populated later
-corrects = []
-incorrects = []
+CORRECTS = []
+INCORRECTS = []
 
 # loop through laws and check user input against definition in laws dictionary
-for k, v in terms_and_definitions.iteritems():
-	term = k+ ": "
-	user_answer = raw_input(term)
-	if user_answer == v:
-		print("correct")
-		corrects.append(k)
-	else:
-		print("work on that one")
-		print("The correct answer is: %s") % (v)
-		incorrects.append(k)
+for k, v in TERMS_AND_DEFINITIONS.iteritems():
+    term = k+ ": "
+    user_answer = raw_input(term)
+    if user_answer == v:
+        print "correct"
+        CORRECTS.append(k)
+        print RTN()
+    else:
+        print "work on that one"
+        print "The correct answer is: %s" % (v)
+        INCORRECTS.append(k)
+        print RTN()
 
 # return for readability
-print(rtn())
+print RTN()
 
-print("performance".upper())
-percentage_correct = float(len(corrects)) / float(terms_total)
-print("You defined %s of the terms you attempted correctly.") % ("{0:.0%}".format(percentage_correct))
+print "performance".upper()
+PERCENTAGE_CORRECT = float(len(CORRECTS)) / float(TERMS_TOTAL)
+print "You defined %s of the terms you attempted correctly." % ("{0:.0%}".
+                                                                format(PERCENTAGE_CORRECT))
 
 # return for readbility
-print(rtn())
+print RTN()
 
 # call function
-correct_and_incorrect_answers(corrects, "correct answers")
+correct_and_incorrect_answers(CORRECTS, "correct answers")
 
 # return for readbility
-print(rtn())
+print RTN()
 
 # call function
-correct_and_incorrect_answers(incorrects, "incorrect answers")
+correct_and_incorrect_answers(INCORRECTS, "incorrect answers")
 
 # return for readbility
-print(rtn())
+print RTN()
