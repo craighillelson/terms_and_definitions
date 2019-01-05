@@ -10,7 +10,8 @@ RTN = lambda: '\n'
 # define function
 def correct_and_incorrect_answers(a, b):
     """ print list of incorrect answers """
-    if len(a) > 0:
+    # if len(a) > 0:
+    if a:
         print b.upper()
         for law in a:
             print law
