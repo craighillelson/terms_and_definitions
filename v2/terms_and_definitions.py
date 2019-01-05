@@ -8,12 +8,12 @@ from collections import namedtuple
 RTN = lambda: '\n'
 
 # define function
-def correct_and_incorrect_answers(a, b):
+def correct_and_incorrect_answers(lst, answers):
     """ print list of incorrect answers """
     # if len(a) > 0:
-    if a:
-        print b.upper()
-        for law in a:
+    if lst:
+        print answers.upper()
+        for law in lst:
             print law
     else:
         pass
@@ -25,11 +25,11 @@ TERMS_AND_DEFINITIONS = {}
 with open('terms_and_definitions.csv') as f:
     F_CSV = csv.reader(f)
     HEADINGS = next(F_CSV)
-    Row = namedtuple('Row', HEADINGS)
+    ROW = namedtuple('ROW', HEADINGS)
     TERMS_TOTAL = 0.0
     for r in F_CSV:
-        row = Row(*r)
-        TERMS_AND_DEFINITIONS[row.term] = row.definition
+        ROW = ROW(*r)
+        TERMS_AND_DEFINITIONS[ROW.term] = ROW.definition
         TERMS_TOTAL = TERMS_TOTAL + 1.0
 
 # create lists to be populated later
