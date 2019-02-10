@@ -18,6 +18,7 @@ def correct_and_incorrect_answers(lst, answers):
     else:
         pass
 
+
 # create dictionary to be populated by contents of csv
 TERMS_AND_DEFINITIONS = {}
 
