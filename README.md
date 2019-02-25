@@ -1,6 +1,7 @@
 # Overview
 
 Quiz game to help learn terms and definitions.
+Runs in Python 3.7.2.
 
 ## Instructions
 
