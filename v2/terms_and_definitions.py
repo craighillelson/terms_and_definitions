@@ -2,6 +2,7 @@
 
 # import
 import csv
+import random
 from collections import namedtuple
 
 # return lambda for readability
@@ -36,9 +37,11 @@ CORRECTS = []
 INCORRECTS = []
 
 # loop through laws and check user input against definition in laws dictionary
-for k, v in TERMS_AND_DEFINITIONS.items():
+for k, v in sorted(TERMS_AND_DEFINITIONS.items(),
+                   key=lambda x: random.random()):
     prompt = k+ ": "
     user_answer = input(prompt)
+    random.choice(list(TERMS_AND_DEFINITIONS))
     if user_answer == v:
         print("correct")
         CORRECTS.append(k)
