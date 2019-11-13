@@ -37,19 +37,19 @@ CORRECTS = []
 INCORRECTS = []
 
 # loop through laws and check user input against definition in laws dictionary
-for k, v in sorted(TERMS_AND_DEFINITIONS.items(),
+for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
                    key=lambda x: random.random()):
-    user_prompt = k+ ": "
+    user_prompt = term+ ": "
     user_answer = input(user_prompt)
     random.choice(list(TERMS_AND_DEFINITIONS))
-    if user_answer == v:
+    if user_answer == definition:
         print("correct")
-        CORRECTS.append(k)
+        CORRECTS.append(term)
         print(RTN())
     else:
         print("work on that one")
-        print(f"The correct answer is: {v}") # % (v)
-        INCORRECTS.append(k)
+        print(f"The correct answer is: {definition}") # % (v)
+        INCORRECTS.append(term)
         print(RTN())
 
 print("performance".upper())
