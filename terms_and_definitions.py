@@ -1,52 +1,63 @@
 """ __doc__ """
 
-import imports
-import employees
+# import
+import csv
+import random
+from collections import namedtuple
 
-def print_employee_holiday_week(a, b, c, d):
-    if a < date < b or c < date < d:
-        print(f"{date.strftime('%Y-%m-%d')}, employee_assigned, - holiday week")
+# return lambda for readability
+RTN = lambda: "\n"
+
+# define function
+def correct_and_incorrect_answers(lst, answers):
+    """ print list of incorrect answers """
+    if lst:
+        print(answers.upper())
+        for term in lst:
+            print(term)
     else:
-        print(f"{date.strftime('%Y-%m-%d')}, employee_assigned")
+        pass
+    print(RTN())
 
 
-def format_dates(x):
-    x = str(year) + '-' + x
-    x = imports.datetime.strptime(x, '%Y-%m-%d')
-    return x
+# create dictionary to be populated by contents of csv
+TERMS_AND_DEFINITIONS = {}
 
+with open('terms_and_definitions.csv') as f:
+    F_CSV = csv.reader(f)
+    ROW = namedtuple('Row', next(F_CSV))
+    for r in F_CSV:
+        row = ROW(*r)
+        TERMS_AND_DEFINITIONS[row.term] = row.definition
 
-D = imports.datetime.now()
-year = D.year
+TERMS_TOTAL = len(TERMS_AND_DEFINITIONS)
 
-tgiving_wk_start = '11-22'
-tgiving_wk_end = '11-29'
-xmas_wk_start = '12-18'
-xmas_wk_end = '12-26'
+# create lists to be populated later
+CORRECTS = []
+INCORRECTS = []
 
-tgiving_wk_start = format_dates(tgiving_wk_start)
-tgiving_wk_end = format_dates(tgiving_wk_end)
-xmas_wk_start = format_dates(xmas_wk_start)
-xmas_wk_end = format_dates(xmas_wk_end)
+# loop through laws and check user input against definition in laws dictionary
+for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
+                   key=lambda x: random.random()):
+    user_prompt = term+ ": "
+    user_answer = input(user_prompt)
+    random.choice(list(TERMS_AND_DEFINITIONS))
+    if user_answer == definition:
+        print("correct")
+        CORRECTS.append(term)
+        print(RTN())
+    else:
+        print("work on that one")
+        print(f"The correct answer is: {definition}") # % (v)
+        INCORRECTS.append(term)
+        print(RTN())
 
-MONDAYS = []
-EMPLOYEE_ASSIGNMENTS = []
+print("performance".upper())
+print(RTN())
+PERCENTAGE_CORRECT = "{0:.0%}".format(float(len(CORRECTS)) / float(TERMS_TOTAL))
+print(f"You defined {PERCENTAGE_CORRECT} of the terms you attempted correctly.")
+print(RTN())
 
-number_of_weeks = input("How many weeks in the future would you like to make \
-the schedule for? ")
-number_of_weeks = number_of_weeks + 1
-
-for i in range(1, number_of_weeks, 1):
-    MONDAYS.append(D + imports.relativedelta(weekday=imports.MO(+i)))
-    d5 = D + imports.relativedelta(weekday=imports.MO(+i))
-
-for n, employee in enumerate(imports.cycle(employees.EMPLOYEES)):
-    EMPLOYEE_ASSIGNMENTS.append(employee)
-    if n >= number_of_weeks:
-        break
-
-ASSIGNMENTS = dict(zip(MONDAYS, EMPLOYEE_ASSIGNMENTS))
-
-for date, employee_assigned in sorted(ASSIGNMENTS.items()):
-    print_employee_holiday_week(tgiving_wk_start, tgiving_wk_end, \
-    xmas_wk_start, xmas_wk_end)
+# call function
+correct_and_incorrect_answers(CORRECTS, "correct answers")
+correct_and_incorrect_answers(INCORRECTS, "incorrect answers")
