@@ -6,7 +6,7 @@ import random
 from collections import namedtuple
 
 # return lambda for readability
-RTN = lambda: "\n"
+RTN = lambda: '\n'
 
 # define function
 def correct_and_incorrect_answers(lst, answers):
@@ -39,25 +39,25 @@ INCORRECTS = []
 # loop through laws and check user input against definition in laws dictionary
 for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
                    key=lambda x: random.random()):
-    user_prompt = term+ ": "
+    user_prompt = term+ ': '
     user_answer = input(user_prompt)
     random.choice(list(TERMS_AND_DEFINITIONS))
     if user_answer == definition:
-        print("correct")
+        print('correct')
         CORRECTS.append(term)
         print(RTN())
     else:
-        print("work on that one")
-        print(f"The correct answer is: {definition}") # % (v)
+        print('work on that one')
+        print(f'The correct answer is: {definition}') # % (v)
         INCORRECTS.append(term)
         print(RTN())
 
-print("performance".upper())
+print('performance'.upper())
 print(RTN())
-PERCENTAGE_CORRECT = "{0:.0%}".format(float(len(CORRECTS)) / float(TERMS_TOTAL))
-print(f"You defined {PERCENTAGE_CORRECT} of the terms you attempted correctly.")
+PERCENTAGE_CORRECT = '{0:.0%}'.format(float(len(CORRECTS)) / float(TERMS_TOTAL))
+print(f'You defined {PERCENTAGE_CORRECT} of the terms you attempted correctly.')
 print(RTN())
 
 # call function
-correct_and_incorrect_answers(CORRECTS, "correct answers")
-correct_and_incorrect_answers(INCORRECTS, "incorrect answers")
+correct_and_incorrect_answers(CORRECTS, 'correct answers')
+correct_and_incorrect_answers(INCORRECTS, 'incorrect answers')
