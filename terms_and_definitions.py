@@ -38,7 +38,7 @@ INCORRECTS = []
 
 # loop through laws and check user input against definition in laws dictionary
 for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
-                   key=lambda x: random.random()):
+                               key=lambda x: random.random()):
     user_prompt = term+ ': '
     user_answer = input(user_prompt)
     random.choice(list(TERMS_AND_DEFINITIONS))
