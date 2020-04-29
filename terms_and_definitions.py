@@ -1,4 +1,4 @@
-""" __doc__ """
+"""Quizzes user on terms and definitions."""
 
 # import
 import csv
@@ -8,9 +8,9 @@ from collections import namedtuple
 # return lambda for readability
 RTN = lambda: '\n'
 
-# define function
+
 def correct_and_incorrect_answers(lst, answers):
-    """ print list of incorrect answers """
+    """Print list of incorrect answers."""
     if lst:
         print(answers.upper())
         for term in lst:
@@ -20,16 +20,30 @@ def correct_and_incorrect_answers(lst, answers):
     print(RTN())
 
 
-# create dictionary to be populated by contents of csv
-TERMS_AND_DEFINITIONS = {}
+def open_csv_populate_dct():
+    """Import a csv and populate a dictionary with its contents."""
+    dct = {}
+    with open('terms_and_definitions.csv') as f:
+        F_CSV = csv.reader(f)
+        ROW = namedtuple('Row', next(F_CSV))
+        for r in F_CSV:
+            row = ROW(*r)
+            dct[row.term] = row.definition
 
-with open('terms_and_definitions.csv') as f:
-    F_CSV = csv.reader(f)
-    ROW = namedtuple('Row', next(F_CSV))
-    for r in F_CSV:
-        row = ROW(*r)
-        TERMS_AND_DEFINITIONS[row.term] = row.definition
+    return dct
 
+
+def output_results():
+    """Calculate percentage answered correct and output results."""
+    print('performance'.upper())
+    PERCENTAGE_CORRECT = '{0:.0%}'.format(float(len(CORRECTS)) / \
+                         float(TERMS_TOTAL))
+    print(f'You defined {PERCENTAGE_CORRECT} of the terms you attempted '
+          f'correctly.')
+    print(RTN())
+
+
+TERMS_AND_DEFINITIONS = open_csv_populate_dct()
 TERMS_TOTAL = len(TERMS_AND_DEFINITIONS)
 
 # create lists to be populated later
@@ -48,16 +62,11 @@ for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
         print(RTN())
     else:
         print('work on that one')
-        print(f'The correct answer is: {definition}') # % (v)
+        print(f'The correct answer is: {definition}')
         INCORRECTS.append(term)
         print(RTN())
 
-print('performance'.upper())
-print(RTN())
-PERCENTAGE_CORRECT = '{0:.0%}'.format(float(len(CORRECTS)) / float(TERMS_TOTAL))
-print(f'You defined {PERCENTAGE_CORRECT} of the terms you attempted correctly.')
-print(RTN())
-
-# call function
+# call functions
+output_results()
 correct_and_incorrect_answers(CORRECTS, 'correct answers')
 correct_and_incorrect_answers(INCORRECTS, 'incorrect answers')
