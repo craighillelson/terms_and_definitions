@@ -23,7 +23,7 @@ def correct_and_incorrect_answers(lst, answers):
 def open_csv_populate_dct():
     """Import a csv and populate a dictionary with its contents."""
     dct = {}
-    with open('terms_and_definitions.csv') as f:
+    with open('csvs/terms_and_definitions.csv') as f:
         F_CSV = csv.reader(f)
         ROW = namedtuple('Row', next(F_CSV))
         for r in F_CSV:
@@ -31,6 +31,12 @@ def open_csv_populate_dct():
             dct[row.term] = row.definition
 
     return dct
+
+
+def append_lst(lst):
+    """Append result in response to term prompt to list."""
+    lst.append(term)
+    print(RTN())
 
 
 def output_results():
@@ -51,20 +57,19 @@ CORRECTS = []
 INCORRECTS = []
 
 # loop through laws and check user input against definition in laws dictionary
+print(RTN())
 for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
                                key=lambda x: random.random()):
-    user_prompt = term+ ': '
-    user_answer = input(user_prompt)
+    print(term)
+    user_answer = input('> ')
     random.choice(list(TERMS_AND_DEFINITIONS))
     if user_answer == definition:
         print('correct')
-        CORRECTS.append(term)
-        print(RTN())
+        append_lst(CORRECTS)
     else:
         print('work on that one')
         print(f'The correct answer is: {definition}')
-        INCORRECTS.append(term)
-        print(RTN())
+        append_lst(INCORRECTS)
 
 # call functions
 output_results()
