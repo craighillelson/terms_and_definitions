@@ -1,11 +1,9 @@
 """Quizzes user on terms and definitions."""
 
-# import
 import csv
 import random
 from collections import namedtuple
 
-# return lambda for readability
 RTN = lambda: '\n'
 
 
@@ -33,7 +31,6 @@ def open_csv_populate_dct():
     return dct
 
 
-# loop through laws and check user input against definition in laws dictionary
 def quiz_user():
     """Quiz user."""
     lst = []
@@ -69,7 +66,7 @@ def count_results():
 
 
 def calc_perc(a, b):
-    """ __doc__ """
+    """Calculate percentage of correct answers."""
     perc = len(a) / b
     perc_correct = '{0:.2f}%'.format(perc)
     print(f'percent correct: {perc_correct}')
