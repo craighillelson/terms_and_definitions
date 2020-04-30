@@ -33,45 +33,51 @@ def open_csv_populate_dct():
     return dct
 
 
-def append_lst(lst):
-    """Append result in response to term prompt to list."""
-    lst.append(term)
+# loop through laws and check user input against definition in laws dictionary
+def quiz_user():
+    """Quiz user."""
+    lst = []
     print(RTN())
+    for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
+                                   key=lambda x: random.random()):
+        print(term)
+        user_answer = input('> ')
+        random.choice(list(TERMS_AND_DEFINITIONS))
+        if user_answer == definition:
+            print('correct')
+            lst.append((term, 'correct'))
+            print(RTN())
+        else:
+            print('work on that one')
+            print(f'The correct answer is: {definition}')
+            lst.append((term, 'incorrect'))
+            print(RTN())
+
+    return lst
 
 
-def output_results():
-    """Calculate percentage answered correct and output results."""
-    print('performance'.upper())
-    PERCENTAGE_CORRECT = '{0:.0%}'.format(float(len(CORRECTS)) / \
-                         float(TERMS_TOTAL))
-    print(f'You defined {PERCENTAGE_CORRECT} of the terms you attempted '
-          f'correctly.')
+def count_results():
+    """Count corrects."""
+    lst = []
+    for i in results:
+        if i[1] == 'correct':
+            lst.append('correct')
+        else:
+            pass
+
+    return lst
+
+
+def calc_perc(a, b):
+    """ __doc__ """
+    perc = len(a) / b
+    perc_correct = '{0:.2f}%'.format(perc)
+    print(f'percent correct: {perc_correct}')
     print(RTN())
 
 
 TERMS_AND_DEFINITIONS = open_csv_populate_dct()
 TERMS_TOTAL = len(TERMS_AND_DEFINITIONS)
-
-# create lists to be populated later
-CORRECTS = []
-INCORRECTS = []
-
-# loop through laws and check user input against definition in laws dictionary
-print(RTN())
-for term, definition in sorted(TERMS_AND_DEFINITIONS.items(),
-                               key=lambda x: random.random()):
-    print(term)
-    user_answer = input('> ')
-    random.choice(list(TERMS_AND_DEFINITIONS))
-    if user_answer == definition:
-        print('correct')
-        append_lst(CORRECTS)
-    else:
-        print('work on that one')
-        print(f'The correct answer is: {definition}')
-        append_lst(INCORRECTS)
-
-# call functions
-output_results()
-correct_and_incorrect_answers(CORRECTS, 'correct answers')
-correct_and_incorrect_answers(INCORRECTS, 'incorrect answers')
+results = quiz_user()
+corrects = count_results()
+calc_perc(corrects, TERMS_TOTAL)
