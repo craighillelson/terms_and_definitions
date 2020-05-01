@@ -7,17 +7,6 @@ from collections import namedtuple
 RTN = lambda: '\n'
 
 
-def correct_and_incorrect_answers(lst, answers):
-    """Print list of incorrect answers."""
-    if lst:
-        print(answers.upper())
-        for term in lst:
-            print(term)
-    else:
-        pass
-    print(RTN())
-
-
 def open_csv_populate_dct():
     """Import a csv and populate a dictionary with its contents."""
     dct = {}
