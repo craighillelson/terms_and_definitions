@@ -43,7 +43,7 @@ def quiz_user():
 
 
 def count_results():
-    """Count corrects."""
+    """Count correct answers."""
     lst = []
     for i in results:
         if i[1] == 'correct':
@@ -54,12 +54,11 @@ def count_results():
     return lst
 
 
-def calc_perc(a, b):
+def calc_perc(correct_answers, total):
     """Calculate percentage of correct answers."""
-    perc = len(a) / b
+    perc = len(correct_answers) / total * 100
     perc_correct = '{0:.2f}%'.format(perc)
-    print(f'percent correct: {perc_correct}')
-    print(RTN())
+    print(f'percent correct: {perc_correct}\n')
 
 
 TERMS_AND_DEFINITIONS = open_csv_populate_dct()
